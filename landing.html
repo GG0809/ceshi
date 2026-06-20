@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公域电商分账系统 - 银行级合规电子账户解决方案</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;color:#1a1a2e;background:#fff;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+img{max-width:100%;display:block}
+:root{--primary:#0a2463;--primary-light:#1e3a8a;--accent:#3b82f6;--accent-light:#60a5fa;--accent-glow:rgba(59,130,246,.15);--gradient-hero:linear-gradient(135deg,#0a2463 0%,#1e3a8a 40%,#2563eb 100%);--gradient-card:linear-gradient(135deg,#f0f5ff 0%,#e8efff 100%);--text-dark:#0f172a;--text-body:#475569;--text-light:#94a3b8;--border:#e2e8f0;--white:#fff;--shadow-sm:0 1px 3px rgba(10,36,99,.08);--shadow-md:0 4px 20px rgba(10,36,99,.1);--shadow-lg:0 10px 40px rgba(10,36,99,.12);--radius:12px;--radius-lg:20px}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.section-label{display:inline-block;font-size:13px;font-weight:600;letter-spacing:2px;color:var(--accent);margin-bottom:12px}
+.section-title{font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--text-dark);line-height:1.3;margin-bottom:16px}
+.section-desc{font-size:17px;color:var(--text-body);max-width:600px;line-height:1.7}
+.section-header{text-align:center;margin-bottom:56px}
+.section-header .section-desc{margin:0 auto}
+.navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(10,36,99,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08);transition:all .3s}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav-brand{font-size:20px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:10px}
+.nav-brand-icon{width:36px;height:36px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--white);animation:icon-glow 3s ease-in-out infinite}
+@keyframes icon-glow{0%,100%{box-shadow:0 0 8px rgba(59,130,246,.4)}50%{box-shadow:0 0 20px rgba(59,130,246,.8)}}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.75);transition:color .2s;position:relative}
+.nav-links a:hover{color:var(--white)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent-light);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-phone{display:flex;align-items:center;gap:8px;color:var(--white);font-size:15px;font-weight:600}
+.nav-phone svg{width:16px;height:16px;fill:var(--accent-light)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.hero{background:var(--gradient-hero);min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(59,130,246,.2) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(96,165,250,.15) 0%,transparent 50%)}
+.hero-grid{position:absolute;inset:0;opacity:.04;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:60px 60px}
+#particles-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
+.hero .container{position:relative;z-index:2}
+.hero-content{max-width:640px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:6px 16px;margin-bottom:28px;font-size:13px;color:rgba(255,255,255,.9);animation:badge-float 3s ease-in-out infinite}
+@keyframes badge-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.hero h1{font-size:clamp(36px,5.5vw,56px);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:20px;letter-spacing:-.5px}
+.hero h1 .highlight{background:linear-gradient(135deg,#60a5fa,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradient-shift 4s ease-in-out infinite;background-size:200% 200%}
+@keyframes gradient-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero p{font-size:18px;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:36px;max-width:520px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:all .3s;position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,.2);border-radius:50%;transform:translate(-50%,-50%);transition:width .6s,height .6s}
+.btn:hover::after{width:300px;height:300px}
+.btn-primary{background:var(--accent);color:var(--white);box-shadow:0 4px 20px rgba(59,130,246,.4)}
+.btn-primary:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 6px 28px rgba(59,130,246,.5)}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.3)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,.05)}
+.advantages{background:var(--white)}
+.adv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.adv-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;transition:all .35s;position:relative;overflow:hidden}
+.adv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient-card);opacity:0;transition:opacity .3s}
+.adv-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(59,130,246,.06) 0%,transparent 70%);opacity:0;transition:opacity .5s}
+.adv-card:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.adv-card:hover::before{opacity:1;background:var(--accent)}
+.adv-card:hover::after{opacity:1}
+.adv-icon{width:52px;height:52px;border-radius:14px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:all .3s}
+.adv-card:hover .adv-icon{transform:scale(1.1);background:var(--accent);box-shadow:0 4px 15px rgba(59,130,246,.4)}
+.adv-card:hover .adv-icon svg{stroke:var(--white)}
+.adv-icon svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:all .3s}
+.adv-card h3{font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-dark)}
+.adv-card p{font-size:14px;color:var(--text-body);line-height:1.7}
+.features{background:#f8fafc}
+.feature-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:80px}
+.feature-row:last-child{margin-bottom:0}
+.feature-row.reverse .feature-visual{order:-1}
+.feature-text .feature-tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:1.5px;color:var(--accent);background:var(--accent-glow);padding:4px 12px;border-radius:100px;margin-bottom:16px}
+.feature-text h3{font-size:26px;font-weight:700;color:var(--text-dark);margin-bottom:14px;line-height:1.3}
+.feature-text p{font-size:15px;color:var(--text-body);line-height:1.8;margin-bottom:24px}
+.feature-list{display:flex;flex-direction:column;gap:12px}
+.feature-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-body);transition:all .3s}
+.feature-list li:hover{transform:translateX(6px);color:var(--accent)}
+.feature-list li svg{width:20px;height:20px;flex-shrink:0;margin-top:1px;stroke:#34d399;fill:none;stroke-width:2;transition:all .3s}
+.feature-list li:hover svg{stroke:var(--accent);transform:scale(1.2)}
+.feature-visual{background:var(--gradient-card);border-radius:var(--radius-lg);padding:40px;min-height:320px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);transition:all .4s;position:relative;overflow:hidden}
+.feature-visual::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(59,130,246,.08),transparent);transition:left .6s}
+.feature-visual:hover::before{left:100%}
+.feature-visual:hover{box-shadow:var(--shadow-lg);transform:scale(1.02)}
+.feature-mockup{width:100%;max-width:400px}
+.mockup-bar{display:flex;gap:6px;margin-bottom:16px}
+.mockup-bar span{width:10px;height:10px;border-radius:50%}
+.mockup-bar span:nth-child(1){background:#ef4444}
+.mockup-bar span:nth-child(2){background:#f59e0b}
+.mockup-bar span:nth-child(3){background:#34d399}
+.mockup-line{height:10px;border-radius:5px;margin-bottom:10px;background:rgba(59,130,246,.12)}
+.mockup-line.w80{width:80%}
+.mockup-line.w60{width:60%}
+.mockup-line.w40{width:40%}
+.mockup-line.w100{width:100%}
+.mockup-block{height:80px;border-radius:10px;margin-top:16px;background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(59,130,246,.15));border:1px dashed rgba(59,130,246,.2);transition:all .4s}
+.feature-visual:hover .mockup-block{border-color:var(--accent);background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.2))}
+.stats{background:var(--gradient-hero);position:relative;overflow:hidden}
+.stats::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(59,130,246,.2) 0%,transparent 60%)}
+.stats .container{position:relative;z-index:2}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center}
+.stat-item{padding:20px}
+.stat-number{font-size:clamp(40px,5vw,56px);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:8px;transition:all .3s}
+.stat-item:hover .stat-number{transform:scale(1.08);text-shadow:0 0 30px rgba(96,165,250,.6)}
+.stat-number .unit{font-size:.5em;font-weight:600;opacity:.8}
+.stat-label{font-size:15px;color:rgba(255,255,255,.65);font-weight:500}
+.contact{background:var(--white)}
+.contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-info h3{font-size:24px;font-weight:700;color:var(--text-dark);margin-bottom:16px}
+.contact-info>p{font-size:15px;color:var(--text-body);line-height:1.7;margin-bottom:32px}
+.contact-detail{display:flex;align-items:center;gap:14px;margin-bottom:20px;transition:all .3s;padding:8px;border-radius:10px}
+.contact-detail:hover{background:#f8fafc;transform:translateX(4px)}
+.contact-detail-icon{width:44px;height:44px;border-radius:12px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.contact-detail:hover .contact-detail-icon{background:var(--accent);box-shadow:0 4px 15px rgba(59,130,246,.4)}
+.contact-detail:hover .contact-detail-icon svg{stroke:var(--white)}
+.contact-detail-icon svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;transition:all .3s}
+.contact-detail-text{font-size:14px;color:var(--text-body)}
+.contact-detail-text strong{display:block;font-size:16px;color:var(--text-dark);font-weight:600}
+.contact-form-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-md);transition:all .3s}
+.contact-form-card:hover{box-shadow:var(--shadow-lg)}
+.contact-form-card h4{font-size:20px;font-weight:700;margin-bottom:24px;color:var(--text-dark)}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;color:var(--text-dark);background:#f8fafc;transition:all .2s;font-family:inherit}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--accent);background:var(--white);box-shadow:0 0 0 3px var(--accent-glow)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-submit{width:100%;justify-content:center;font-size:16px;padding:16px}
+.footer{background:var(--primary);padding:40px 0;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.footer p{font-size:13px;color:rgba(255,255,255,.45);line-height:2}
+.footer a{color:rgba(255,255,255,.6);transition:color .2s}
+.footer a:hover{color:var(--white)}
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.fade-left{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
+.fade-left.visible{opacity:1;transform:translateX(0)}
+.fade-right{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease}
+.fade-right.visible{opacity:1;transform:translateX(0)}
+.progress-bar{height:3px;background:var(--accent);position:fixed;top:0;left:0;z-index:9999;transition:width .1s;border-radius:0 2px 2px 0}
+@media(max-width:900px){.feature-row{grid-template-columns:1fr;gap:32px}.feature-row.reverse .feature-visual{order:0}.contact-wrapper{grid-template-columns:1fr;gap:40px}.stats-grid{grid-template-columns:1fr;gap:32px}}
+@media(max-width:768px){.nav-links{display:none}.nav-phone{display:none}.nav-toggle{display:flex}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(10,36,99,.98);padding:24px;gap:20px;border-bottom:1px solid rgba(255,255,255,.08)}.section{padding:64px 0}.hero{min-height:auto;padding:120px 0 80px}.hero h1{font-size:32px}.hero-actions{flex-direction:column}.btn{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="navbar">
+<div class="container">
+<a href="#" class="nav-brand"><div class="nav-brand-icon">分</div><span>[品牌名称]</span></a>
+<div class="nav-links" id="navLinks">
+<a href="#advantages">核心优势</a>
+<a href="#features">功能介绍</a>
+<a href="#stats">实力数据</a>
+<a href="#contact">联系我们</a>
+</div>
+<a href="tel:15136005608" class="nav-phone">
+<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+151-3600-5608
+</a>
+<button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
+</div>
+</nav>
+
+<section class="hero" id="hero">
+<canvas id="particles-canvas"></canvas>
+<div class="hero-grid"></div>
+<div class="container">
+<div class="hero-content">
+<div class="hero-badge"><span class="hero-badge-dot"></span>银行级电子账户·资金合规分账</div>
+<h1>公域电商<br><span class="highlight">合规分账</span>解决方案</h1>
+<p>基于银行电子账户体系，为电商平台提供安全、合规、高效的资金分账服务。持牌机构背书，让每一笔交易都安心可靠。</p>
+<div class="hero-actions">
+<a href="#contact" class="btn btn-primary">免费试用 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<a href="#features" class="btn btn-outline">了解更多</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section advantages" id="advantages">
+<div class="container">
+<div class="section-header fade-up">
+<span class="section-label">Core Advantages</span>
+<h2 class="section-title">为什么选择我们？</h2>
+<p class="section-desc">以合规为基石，以技术为驱动，为您的电商交易保驾护航</p>
+</div>
+<div class="adv-grid">
+<div class="adv-card fade-up" style="transition-delay:.1s">
+<div class="adv-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+<h3>持牌合规</h3>
+<p>银行电子账户体系，持牌支付机构背书，严格遵循央行监管要求，资金流向透明可追溯。</p>
+</div>
+<div class="adv-card fade-up" style="transition-delay:.2s">
+<div class="adv-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+<h3>资金安全</h3>
+<p>资金由银行存管，平台不经手交易资金，有效隔离资金风险，保障各方权益。</p>
+</div>
+<div class="adv-card fade-up" style="transition-delay:.3s">
+<div class="adv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+<h3>实时到账</h3>
+<p>分账规则自动执行，资金实时清算到账，T+0结算效率，大幅提升资金周转速度。</p>
+</div>
+<div class="adv-card fade-up" style="transition-delay:.4s">
+<div class="adv-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+<h3>智能监控</h3>
+<p>7×24小时风控监测，异常交易实时预警，多维度数据分析，让合规管理更轻松。</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section features" id="features">
+<div class="container">
+<div class="section-header fade-up">
+<span class="section-label">Features</span>
+<h2 class="section-title">核心功能</h2>
+<p class="section-desc">全方位满足电商分账场景需求</p>
+</div>
+<div class="feature-row fade-up">
+<div class="feature-text fade-left">
+<span class="feature-tag">智能分账</span>
+<h3>灵活配置分账规则</h3>
+<p>支持按比例、按固定金额、阶梯分账等多种模式，可根据业务场景自由组合，一键配置即刻生效。</p>
+<ul class="feature-list">
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>支持多方分账，最多可配置10个接收方</li>
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>动态分账比例，支持按订单实时调整</li>
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>分账延迟到账，保障交易安全</li>
+</ul>
+</div>
+<div class="feature-visual fade-right"><div class="feature-mockup"><div class="mockup-bar"><span></span><span></span><span></span></div><div class="mockup-line w100"></div><div class="mockup-line w80"></div><div class="mockup-line w60"></div><div class="mockup-block"></div></div></div>
+</div>
+<div class="feature-row reverse fade-up">
+<div class="feature-text fade-right">
+<span class="feature-tag">对账管理</span>
+<h3>自动化对账清算</h3>
+<p>自动生成对账单，支持多维度数据筛选与导出。与银行流水自动匹配，异常情况智能提示，对账效率提升10倍。</p>
+<ul class="feature-list">
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>日/周/月多维度对账报表</li>
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>异常交易自动标记与追踪</li>
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>支持Excel/PDF格式一键导出</li>
+</ul>
+</div>
+<div class="feature-visual fade-left"><div class="feature-mockup"><div class="mockup-bar"><span></span><span></span><span></span></div><div class="mockup-line w100"></div><div class="mockup-line w60"></div><div class="mockup-line w100"></div><div class="mockup-line w40"></div><div class="mockup-block"></div></div></div>
+</div>
+<div class="feature-row fade-up">
+<div class="feature-text fade-left">
+<span class="feature-tag">开放接口</span>
+<h3>便捷API接入</h3>
+<p>标准化RESTful API接口，提供完善的SDK文档与测试环境。平均2个工作日即可完成接入，技术支持全程跟进。</p>
+<ul class="feature-list">
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>全链路HTTPS加密传输</li>
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>提供Java/Python/PHP等多语言SDK</li>
+<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>沙箱环境免费测试</li>
+</ul>
+</div>
+<div class="feature-visual fade-right"><div class="feature-mockup"><div class="mockup-bar"><span></span><span></span><span></span></div><div class="mockup-line w80"></div><div class="mockup-line w100"></div><div class="mockup-line w60"></div><div class="mockup-block"></div></div></div>
+</div>
+</div>
+</section>
+
+<section class="section stats" id="stats">
+<div class="container">
+<div class="section-header fade-up">
+<span class="section-label" style="color:rgba(255,255,255,.7)">By The Numbers</span>
+<h2 class="section-title" style="color:var(--white)">实力见证</h2>
+<p class="section-desc" style="color:rgba(255,255,255,.6)">数据背后，是众多商家的信任之选</p>
+</div>
+<div class="stats-grid fade-up">
+<div class="stat-item"><div class="stat-number" data-target="1368">0</div><div class="stat-label">服务商户数量</div></div>
+<div class="stat-item"><div class="stat-number" data-target="5000">0</div><div class="stat-label">年交易金额（万元）</div></div>
+<div class="stat-item"><div class="stat-number" data-target="6">0</div><div class="stat-label">接入平台数量</div></div>
+</div>
+</div>
+</section>
+
+<section class="section contact" id="contact">
+<div class="container">
+<div class="section-header fade-up">
+<span class="section-label">Contact Us</span>
+<h2 class="section-title">免费试用</h2>
+<p class="section-desc">填写下方表单，我们的商务顾问将在24小时内与您联系</p>
+</div>
+<div class="contact-wrapper fade-up">
+<div class="contact-info">
+<h3>联系我们</h3>
+<p>无论您是电商平台、还是品牌商家，我们都将为您提供量身定制的分账解决方案。</p>
+<div class="contact-detail">
+<div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+<div class="contact-detail-text"><strong>151-3600-5608</strong>商务合作热线</div>
+</div>
+<div class="contact-detail">
+<div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+<div class="contact-detail-text"><strong>service@example.com</strong>邮件咨询</div>
+</div>
+<div class="contact-detail">
+<div class="contact-detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+<div class="contact-detail-text"><strong>工作日 9:00 - 18:00</strong>在线响应时间</div>
+</div>
+</div>
+<div class="contact-form-card">
+<h4>预约免费咨询</h4>
+<form id="contactForm" action="https://formsubmit.co/359728182@qq.com" method="POST">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="box">
+<input type="hidden" name="_next" value="">
+
+<div class="form-group"><label for="name">您的姓名 *</label><input type="text" id="name" name="name" placeholder="请输入您的姓名" required></div>
+<div class="form-group"><label for="phone">联系电话 *</label><input type="tel" id="phone" name="phone" placeholder="请输入手机号码" required></div>
+<div class="form-group"><label for="company">公司名称</label><input type="text" id="company" name="company" placeholder="请输入公司名称"></div>
+<div class="form-group"><label for="platform">所属平台</label><select id="platform" name="platform"><option value="">请选择您接入的平台</option><option>淘宝/天猫</option><option>京东</option><option>拼多多</option><option>抖音电商</option><option>快手电商</option><option>其他平台</option></select></div>
+<div class="form-group"><label for="message">需求描述</label><textarea id="message" name="message" placeholder="请简要描述您的分账需求..."></textarea></div>
+<button type="submit" class="btn btn-primary form-submit">提交咨询 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="container">
+<p>© 2026 [品牌名称] · 公域电商分账系统<br>
+<a href="#">隐私政策</a> · <a href="#">用户协议</a> · <a href="#">京ICP备XXXXXXXX号</a></p>
+</div>
+</footer>
+
+<script>
+// ===== 粒子背景 - 铺满整个首屏 =====
+(function(){
+var canvas=document.getElementById('particles-canvas');
+if(!canvas)return;
+var ctx=canvas.getContext('2d');
+var particles=[];
+var mouse={x:null,y:null};
+
+function resize(){
+canvas.width=canvas.parentElement.offsetWidth;
+canvas.height=canvas.parentElement.offsetHeight;
+}
+resize();
+window.addEventListener('resize',resize);
+
+canvas.addEventListener('mousemove',function(e){
+var r=canvas.getBoundingClientRect();
+mouse.x=e.clientX-r.left;
+mouse.y=e.clientY-r.top;
+});
+canvas.addEventListener('mouseleave',function(){mouse.x=null;mouse.y=null});
+
+var particleCount=80;
+var connectionDist=160;
+
+function Particle(){
+this.x=Math.random()*canvas.width;
+this.y=Math.random()*canvas.height;
+this.vx=(Math.random()-.5)*1.2;
+this.vy=(Math.random()-.5)*1.2;
+this.r=Math.random()*2.5+1;
+this.opacity=Math.random()*.6+.2;
+}
+Particle.prototype.update=function(){
+this.x+=this.vx;
+this.y+=this.vy;
+if(this.x<0||this.x>canvas.width)this.vx*=-1;
+if(this.y<0||this.y>canvas.height)this.vy*=-1;
+};
+Particle.prototype.draw=function(){
+ctx.beginPath();
+ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+ctx.fillStyle='rgba(255,255,255,'+this.opacity+')';
+ctx.fill();
+};
+
+for(var i=0;i<particleCount;i++){particles.push(new Particle())}
+
+function connectParticles(){
+for(var i=0;i<particles.length;i++){
+for(var j=i+1;j<particles.length;j++){
+var dx=particles[i].x-particles[j].x;
+var dy=particles[i].y-particles[j].y;
+var dist=Math.sqrt(dx*dx+dy*dy);
+if(dist<connectionDist){
+ctx.beginPath();
+ctx.moveTo(particles[i].x,particles[i].y);
+ctx.lineTo(particles[j].x,particles[j].y);
+ctx.strokeStyle='rgba(255,255,255,'+(0.15*(1-dist/connectionDist))+')';
+ctx.lineWidth=.6;
+ctx.stroke();
+}
+}
+}
+if(mouse.x!==null&&mouse.y!==null){
+for(var i=0;i<particles.length;i++){
+var dx=particles[i].x-mouse.x;
+var dy=particles[i].y-mouse.y;
+var dist=Math.sqrt(dx*dx+dy*dy);
+if(dist<220){
+ctx.beginPath();
+ctx.moveTo(particles[i].x,particles[i].y);
+ctx.lineTo(mouse.x,mouse.y);
+ctx.strokeStyle='rgba(96,165,250,'+(0.35*(1-dist/220))+')';
+ctx.lineWidth=1;
+ctx.stroke();
+}
+}
+}
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+for(var i=0;i<particles.length;i++){particles[i].update();particles[i].draw()}
+connectParticles();
+requestAnimationFrame(animate);
+}
+animate();
+})();
+
+// ===== 进度条 =====
+(function(){
+var bar=document.getElementById('progressBar');
+if(!bar)return;
+window.addEventListener('scroll',function(){
+var h=document.documentElement.scrollHeight-window.innerHeight;
+var s=window.scrollY||window.pageYOffset;
+var pct=(s/h)*100;
+bar.style.width=pct+'%';
+});
+})();
+
+// ===== 数字滚动动画 =====
+(function(){
+var counted=false;
+function animateCount(el){
+var target=parseInt(el.getAttribute('data-target'));
+var duration=2000;
+var start=performance.now();
+var fmt=function(v){return v.toLocaleString('zh-CN')};
+function tick(now){
+var elapsed=now-start;
+var progress=Math.min(elapsed/duration,1);
+var eased=1-Math.pow(1-progress,3);
+var current=Math.floor(target*eased);
+el.textContent=fmt(current);
+if(progress<1){requestAnimationFrame(tick)}
+else{el.textContent=fmt(target)}
+}
+requestAnimationFrame(tick);
+}
+var statsSection=document.getElementById('stats');
+if(!statsSection)return;
+var observer=new IntersectionObserver(function(entries){
+entries.forEach(function(e){
+if(e.isIntersecting&&!counted){
+counted=true;
+statsSection.querySelectorAll('.stat-number[data-target]').forEach(function(el){animateCount(el)});
+}
+e.target.classList.add('visible');
+});
+},{threshold:0.3});
+observer.observe(statsSection);
+})();
+
+// ===== 通用滚动动画 =====
+(function(){
+var obs=new IntersectionObserver(function(entries){
+entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.15});
+document.querySelectorAll('.fade-up,.fade-left,.fade-right').forEach(function(el){obs.observe(el)});
+})();
+
+// ===== 导航栏 =====
+(function(){
+var toggle=document.getElementById('navToggle');
+var links=document.getElementById('navLinks');
+if(toggle&&links){
+toggle.addEventListener('click',function(){links.classList.toggle('open')});
+links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open')})});
+}
+var navbar=document.querySelector('.navbar');
+if(navbar){
+window.addEventListener('scroll',function(){
+if(window.scrollY>50){navbar.style.background='rgba(10,36,99,.98)';navbar.style.boxShadow='0 2px 20px rgba(0,0,0,.15)'}
+else{navbar.style.background='rgba(10,36,99,.92)';navbar.style.boxShadow='none'}
+});
+}
+})();
+
+</script>
+</body>
+</html>
+
